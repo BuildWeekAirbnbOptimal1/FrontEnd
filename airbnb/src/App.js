@@ -1,9 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.scss";
+import ListingForm from "./components/ListingForm"
 
 function App() {
-  return <div className="App">This is where the magic happens.</div>;
+  return (
+    <ListingForm />
+  )
 }
 
 export default App;
