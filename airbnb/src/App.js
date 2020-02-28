@@ -12,11 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" render={() => <LoginForm />} />
         <Route exact path="/about" render={() => <h1>about</h1>} />
-        <ProtectedRoute
-          exact
-          path="/listings"
-          render={() => <h1>Listings</h1>}
-        />
+        <Route exact path="/listings" render={() => <h1>Listings</h1>} />
       </Switch>
     </div>
   );
