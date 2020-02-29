@@ -23,9 +23,19 @@ const LoginForm = props => {
       <form>
         <h1>Log in to Optimize</h1>
         <label htmlFor="username">username</label>
-        <input name="username" type="text" onChange={handleChange}></input>
+        <input
+          name="username"
+          type="text"
+          onChange={handleChange}
+          value={creds.username}
+        ></input>
         <label htmlFor="password">password</label>
-        <input name="password" type="password" onChange={handleChange}></input>
+        <input
+          name="password"
+          type="password"
+          onChange={handleChange}
+          value={creds.password}
+        ></input>
         <div>
           <button onClick={login}>Login</button>
           <button>Register</button>
