@@ -1,16 +1,15 @@
 .form-card {
-  //   z-index: -1;
   position: relative;
   height: 100vh;
   background: url("../assets/castle.jpeg");
   background-size: cover;
-  background-position: 10;
+  background-position: top;
   form {
     border-radius: 8px;
     background: white;
     padding: 30px;
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;

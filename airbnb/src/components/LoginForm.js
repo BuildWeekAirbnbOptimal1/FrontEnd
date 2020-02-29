@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { LegitContext } from "../contexts/LegitContext";
 import "../styles/LoginForm.scss";
 
-const LoginForm = () => {
+const LoginForm = props => {
+  const { auth, setAuth } = useContext(LegitContext);
+  const [creds, setCreds] = useState({
+    username: "",
+    password: ""
+  });
+
+  const handleChange = e => {
+    setCreds({ ...creds, [e.target.name]: e.target.value });
+  };
+
+  const login = e => {
+    e.preventDefault();
+    setAuth(true);
+    props.history.push("/listings");
+  };
   return (
     <div className="form-card">
       <form>
         <h1>Log in to Optimize</h1>
         <label htmlFor="username">username</label>
-        <input name="username" type="text"></input>
+        <input name="username" type="text" onChange={handleChange}></input>
         <label htmlFor="password">password</label>
-        <input name="password" type="password"></input>
+        <input name="password" type="password" onChange={handleChange}></input>
         <div>
-          <button onClick={() => console.log("Clicked login")}>Login</button>
+          <button onClick={login}>Login</button>
           <button>Register</button>
         </div>
       </form>

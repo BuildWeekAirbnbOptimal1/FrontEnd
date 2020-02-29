@@ -1,20 +1,26 @@
-import React from "react";
-import { Link, Route, Switch } from "react-router";
+import React, { useState } from "react";
+import { Route, Switch, useLocation } from "react-router";
+import { LegitContext } from "./contexts/LegitContext";
 import LoginForm from "./components/LoginForm";
+import ListingForm from "./components/ListingForm";
 import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.scss";
+import { AuthProvider } from "./utils/AuthenticationPractice";
 
 function App() {
+  let location = useLocation();
+  const [auth, setAuth] = useState("false");
   return (
-    <div className="App">
-      <Navigation />
-      <Switch>
-        <Route exact path="/" render={() => <LoginForm />} />
-        <Route exact path="/about" render={() => <h1>about</h1>} />
-        <Route exact path="/listings" render={() => <h1>Listings</h1>} />
-      </Switch>
-    </div>
+    <LegitContext.Provider value={{ auth, setAuth }}>
+      <div className="App">
+        <Navigation location={location} />
+        <Switch>
+          <Route exact path="/" component={LoginForm} />
+          <ProtectedRoute exact path="/listings" component={ListingForm} />
+        </Switch>
+      </div>
+    </LegitContext.Provider>
   );
 }
 

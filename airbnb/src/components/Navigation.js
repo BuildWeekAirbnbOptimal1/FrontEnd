@@ -1,18 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Navigation.scss";
-
 import logo from "../assets/airbnb-white.png";
+import logogray from "../assets/airbnb-gray.png";
 
-const Navigation = () => {
+const Navigation = props => {
   return (
-    <div className="navbar">
-      <img id="logo" src={logo} alt="logo" />
+    <div
+      className={`navbar ${
+        props.location.pathname !== "/" ? "other-nav" : null
+      }`}
+    >
+      {props.location.pathname === "/" ? (
+        <img id="logo" src={logo} alt="logo" />
+      ) : (
+        <img id="logo" src={logogray} alt="logo" />
+      )}
 
       <nav>
-        <ul className="links">
+        <ul className="dark-nav">
           <li>
-            <Link to="/about">About</Link>
+            <a href="#">About</a>
           </li>
           <li>
             <Link to="/listings">Listings</Link>

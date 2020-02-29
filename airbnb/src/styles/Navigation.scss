@@ -26,3 +26,14 @@
     }
   }
 }
+.other-nav {
+  background: white;
+  border-bottom: 1px solid gray;
+  nav .dark-nav {
+    li {
+      a {
+        color: black;
+      }
+    }
+  }
+}
