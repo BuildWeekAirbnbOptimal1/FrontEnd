@@ -7,18 +7,20 @@ import logogray from "../assets/airbnb-gray.png";
 const Navigation = props => {
   return (
     <div
-      className={`navbar ${
-        props.location.pathname !== "/" ? "other-nav" : null
-      }`}
+      className="navbar"
+      id={`${props.location.pathname !== "/" &&
+        props.location.pathname !== "/register" &&
+        "dark-nav"}`}
     >
-      {props.location.pathname === "/" ? (
+      {props.location.pathname === "/" ||
+      props.location.pathname === "/register" ? (
         <img id="logo" src={logo} alt="logo" />
       ) : (
         <img id="logo" src={logogray} alt="logo" />
       )}
 
       <nav>
-        <ul className="dark-nav">
+        <ul>
           <li>
             <a href="#">About</a>
           </li>

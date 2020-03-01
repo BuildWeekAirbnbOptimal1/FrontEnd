@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Route, Switch, useLocation } from "react-router";
 import { LegitContext } from "./contexts/LegitContext";
 import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 import ListingForm from "./components/ListingForm";
+import ListingCard from "./components/ListingCard";
 import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.scss";
@@ -17,7 +19,8 @@ function App() {
         <Navigation location={location} />
         <Switch>
           <Route exact path="/" component={LoginForm} />
-          <ProtectedRoute exact path="/listings" component={ListingForm} />
+          <Route exact path="/register" component={RegisterForm} />
+          <ProtectedRoute exact path="/listings" component={ListingCard} />
         </Switch>
       </div>
     </LegitContext.Provider>

@@ -18,6 +18,9 @@ const LoginForm = props => {
     setAuth(true);
     props.history.push("/listings");
   };
+  const goToRegister = () => {
+    props.history.push("/register");
+  };
   return (
     <div className="form-card">
       <form>
@@ -36,9 +39,13 @@ const LoginForm = props => {
           onChange={handleChange}
           value={creds.password}
         ></input>
-        <div>
-          <button onClick={login}>Login</button>
-          <button>Register</button>
+        <div className="btn-div">
+          <button className="login" onClick={login}>
+            Login
+          </button>
+          <button className="register" onClick={goToRegister}>
+            Register
+          </button>
         </div>
       </form>
     </div>

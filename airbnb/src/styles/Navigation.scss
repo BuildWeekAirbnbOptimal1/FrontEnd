@@ -18,21 +18,34 @@
       margin: 0;
       padding: 0;
       display: flex;
-      li a {
-        padding: 0 20px;
-        text-decoration: none;
-        color: white;
+      li {
+        a {
+          margin: 0 20px;
+          text-decoration: none;
+          color: white;
+          font-weight: 600;
+          font-size: 18px;
+          &:hover {
+            border-bottom: 2px solid white;
+          }
+        }
       }
     }
   }
 }
-.other-nav {
+#dark-nav {
   background: white;
   border-bottom: 1px solid gray;
-  nav .dark-nav {
-    li {
-      a {
+  nav {
+    ul {
+      li {
         color: black;
+        a {
+          color: black;
+          &:hover {
+            border-bottom: 2px solid black;
+          }
+        }
       }
     }
   }
