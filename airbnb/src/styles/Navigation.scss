@@ -36,6 +36,11 @@
 #dark-nav {
   background: white;
   border-bottom: 1px solid gray;
+  width: calc(100% - 350px);
+  left: 350px;
+  #logo {
+    width: 30px;
+  }
   nav {
     ul {
       li {

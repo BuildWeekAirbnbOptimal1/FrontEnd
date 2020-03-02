@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import img from "../assets/houses.jpeg";
+import "../styles/ListingCard.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faBed,
+  faBath,
+  faDoorClosed
+} from "@fortawesome/free-solid-svg-icons";
 
-const ListingCard = () => {
+const ListingCard = ({ item }) => {
   const [content, setContent] = useState({
-    image: { img },
+    // image: { img },
     houseType: "Apartment",
     price: "$125,000",
     region: "Haagen-Dasz Region",
@@ -12,18 +20,31 @@ const ListingCard = () => {
     rooms: 3
   });
   return (
-    <div style={{ "padding-top": "100px" }}>
-      <img src={img} alt="image" />
-      <div>
-        <h2>{content.houseType}</h2>
-        <h1>{content.price}</h1>
+    <div className="card">
+      <div className="imgContainer">{/* <img src={img} alt="image" /> */}</div>
+      <div className="cardHeader">
+        <div className="hometype">
+          <FontAwesomeIcon icon={faHome} size="lg" />
+          <h2>{item.houseType}</h2>
+        </div>
+
+        <h1>{item.price}/day</h1>
       </div>
-      <div>
-        <h3>{content.region}</h3>
-        <div>
-          <h3>{content.beds}</h3>
-          <h3>{content.baths}</h3>
-          <h3>{content.rooms}</h3>
+      <div className="content">
+        <h2>{item.region}</h2>
+        <div className="attributes">
+          <div>
+            <FontAwesomeIcon icon={faBed} size="2x" />
+            <h3>{item.beds} Beds</h3>
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faBath} size="2x" />
+            <h3>{item.baths} Baths</h3>
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faDoorClosed} size="2x" />
+            <h3>{item.rooms} Rooms</h3>
+          </div>
         </div>
       </div>
     </div>

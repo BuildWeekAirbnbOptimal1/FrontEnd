@@ -16,6 +16,7 @@ const LoginForm = props => {
   const login = e => {
     e.preventDefault();
     setAuth(true);
+    console.log(auth);
     props.history.push("/listings");
   };
   const goToRegister = () => {
