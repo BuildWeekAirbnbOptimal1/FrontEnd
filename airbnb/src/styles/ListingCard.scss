@@ -5,18 +5,35 @@ $bnb-color: #ff5a5a;
   width: 300px;
   text-align: left;
   border-radius: 8px;
-  box-shadow: 6px 5px 6px rgba(0, 0, 0, 0.3);
   margin: 20px;
+  .panel-wrapper {
+    filter: drop-shadow(3px 0px 3px rgba(0, 0, 0, 0.3));
+    .controlpanel {
+      clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+      padding: 0 25px;
+      width: 100px;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: $blue;
+      color: white;
+      div {
+        cursor: pointer;
+      }
+    }
+  }
   .imgContainer {
-    border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     height: 200px;
     background: url("../assets/houses.jpeg");
     background-size: cover;
+    box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.3);
   }
   .cardHeader {
     border-bottom: 1px solid black;
     padding: 8px 8px;
+    box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.3);
 
     .hometype {
       display: flex;
@@ -36,6 +53,7 @@ $bnb-color: #ff5a5a;
     padding: 10px 8px;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
+    box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.3);
     .attributes {
       div {
         display: flex;

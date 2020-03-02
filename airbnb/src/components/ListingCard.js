@@ -6,7 +6,10 @@ import {
   faHome,
   faBed,
   faBath,
-  faDoorClosed
+  faDoorClosed,
+  faEdit,
+  faTrashAlt,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 
 const ListingCard = ({ item }) => {
@@ -21,6 +24,16 @@ const ListingCard = ({ item }) => {
   });
   return (
     <div className="card">
+      <div className="panel-wrapper">
+        <div className="controlpanel">
+          <div>
+            <FontAwesomeIcon icon={faEdit} size="lg" />
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faTrashAlt} size="lg" />
+          </div>
+        </div>
+      </div>
       <div className="imgContainer">{/* <img src={img} alt="image" /> */}</div>
       <div className="cardHeader">
         <div className="hometype">
