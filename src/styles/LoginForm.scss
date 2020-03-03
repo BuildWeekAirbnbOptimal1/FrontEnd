@@ -49,6 +49,7 @@
       margin: 3px 0;
       height: 35px;
       border: 1px solid #ebebeb;
+      font-size: 16px;
       &:focus {
         box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
         border: 2px solid #807a7a;
@@ -73,13 +74,23 @@
   }
 }
 .regstyle {
-  background: url("../assets/brandenburg.jpeg");
+  background: url("../assets/garden.jpeg");
   background-size: cover;
-  background-position: center;
-  .login2 {
-    background: #91bdd0;
-  }
-  .submit {
-    background: #ff5a5a;
+  background-position: bottom;
+  form {
+    height: 450px;
+    top: 40%;
+    .btn-div {
+      position: absolute;
+      top: 82%;
+      left: 10%;
+      right: 10%;
+      .login2 {
+        background: #91bdd0;
+      }
+      .submit {
+        background: #ff5a5a;
+      }
+    }
   }
 }

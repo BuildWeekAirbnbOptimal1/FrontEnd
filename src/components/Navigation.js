@@ -5,6 +5,15 @@ import logo from "../assets/airbnb-white.png";
 import logogray from "../assets/airbnb-gray.png";
 
 const Navigation = props => {
+  const SignIn = () => {
+    localStorage.getItem("token")
+      ? console.log("Welcome")
+      : alert("Please sign in to access Listings.");
+  };
+
+  const signOut = () => {
+    localStorage.removeItem("token");
+  };
   return (
     <div
       className="navbar"
@@ -25,10 +34,19 @@ const Navigation = props => {
             <a href="#">About</a>
           </li>
           <li>
-            <Link to="/listings">Listings</Link>
+            <Link onClick={SignIn} to="/listings">
+              Listings
+            </Link>
           </li>
           <li>
-            <Link to="/">Login</Link>
+            {props.location.pathname === "/" ||
+            props.location.pathname === "/register" ? (
+              <Link to="/">Login</Link>
+            ) : (
+              <Link to="/" onClick={signOut}>
+                Logout
+              </Link>
+            )}
           </li>
         </ul>
       </nav>

@@ -7,6 +7,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: token
     },
-    baseURL: "null"
+    baseURL: "https://airbnboptimal.herokuapp.com"
   });
 };
