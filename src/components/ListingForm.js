@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withFormik, Form, Field, ErrorMessage, yupToFormErrors } from "formik";
 import * as Yup from "yup";
 
-function FormikListingForm() {
+function FormikListingForm({ values, errors, touched, isSubmitting }) {
     return (
    <Form>
        <h2>Add A New Property</h2>
