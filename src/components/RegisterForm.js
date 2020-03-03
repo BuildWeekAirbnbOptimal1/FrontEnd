@@ -13,6 +13,8 @@ const RegisterForm = props => {
     email: ""
   });
 
+  const [confirm, setConfirm] = useState(false);
+
   const handleChange = e => {
     setUserCreds({ ...userCreds, [e.target.name]: e.target.value });
   };
@@ -23,6 +25,9 @@ const RegisterForm = props => {
       .post("user/register", userCreds)
       .then(res => {
         console.log(res);
+        if (res.statusText === "Created") {
+          setConfirm(true);
+        }
         // localStorage.setItem("token", res.data.payload);
         // props.history.push("/listings");
       })
@@ -41,6 +46,11 @@ const RegisterForm = props => {
     <div className="form-card regstyle">
       <form>
         <h1>Register</h1>
+        {confirm ? (
+          <h4 style={{ color: "lightgreen", marginTop: "-20px" }}>
+            Thanks for registering.
+          </h4>
+        ) : null}
         <label htmlFor="firstname">first name</label>
         <input
           name="firstname"
