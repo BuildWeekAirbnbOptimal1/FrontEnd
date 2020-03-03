@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withFormik, Form, Field, ErrorMessage, yupToFormErrors } from "formik";
 import * as Yup from "yup";
 
@@ -10,19 +10,19 @@ function FormikListingForm() {
        <div>Bathrooms: <Field type="number" name="bathrooms"/></div>
        <div>Rooms: <Field type="number" name="rooms"/></div>
        <div>Amenities:<Field type="checkbox" name="amenities" /></div>
-       <div>Home Type:<Field component="select" name="hometype" value={['A', 'B']} /></div>
+       <div>Home Type:<Field component="select" name="houseType" value={['A', 'B']} /></div>
        <button type="submit">Add Property</button>
    </Form>
     );
 }
     const ListingForm = withFormik({
-        mapPropsToValues({ bedrooms, bathrooms, rooms, amenities, hometype }) {
+        mapPropsToValues({ bedrooms, bathrooms, rooms, amenities, houseType }) {
             return {
                 bedrooms: bedrooms || 1,
                 bathrooms: bathrooms || 1,
                 rooms: rooms || 2,
                 amenities: amenities,
-                hometype: hometype,
+                houseType: houseType,
             };
         },
         validationSchema: Yup.object().shape({

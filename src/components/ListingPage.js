@@ -30,11 +30,24 @@ const ListingPage = () => {
       rooms: 1
     }
   ]);
+
+  const addNewListing = x => {
+    const newListing = {
+      id: Date.now(),
+      houseType: x.houseType,
+      region: x.region,
+      beds: x.beds,
+      baths: x.baths,
+      rooms: x.rooms
+    };
+
+    setListings([...listings, newListing]);
+  }
   return (
     <div className="listingPage">
       <div className="form-wrapper">
         <h1> Add A Property</h1>
-        <ListingForm />
+        <ListingForm addNewListing={addNewListing}/>
       </div>
       <div className="grid-wrapper">
         <div className="grid">
