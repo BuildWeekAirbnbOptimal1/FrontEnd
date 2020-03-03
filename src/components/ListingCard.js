@@ -8,28 +8,35 @@ import {
   faBath,
   faDoorClosed,
   faEdit,
-  faTrashAlt,
-  faTrash
+  faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-const ListingCard = ({ item }) => {
-  const [content, setContent] = useState({
-    // image: { img },
-    houseType: "Apartment",
-    price: "$125,000",
-    region: "Haagen-Dasz Region",
-    beds: 2,
-    baths: 2,
-    rooms: 3
-  });
+const ListingCard = ({ item, listings, setListings }) => {
+  const deleteListing = () => {
+    console.log("Clicked this");
+    axiosWithAuth()
+      .delete(`https://buildweek-airbnb.herokuapp.com/api/property/${item.id}`)
+      .then(res => {
+        console.log(res);
+        // console.log("listings in card", listings);
+        setListings(listings.filter(listing => listing.id !== item.id));
+      })
+      .catch(err => console.log(err));
+  };
+
+  const editListing = () => {
+    console.log("Edit this Listing");
+  };
+
   return (
     <div className="card">
       <div className="panel-wrapper">
         <div className="controlpanel">
-          <div>
+          <div onClick={editListing}>
             <FontAwesomeIcon icon={faEdit} size="lg" />
           </div>
-          <div>
+          <div onClick={deleteListing}>
             <FontAwesomeIcon icon={faTrashAlt} size="lg" />
           </div>
         </div>
@@ -38,13 +45,17 @@ const ListingCard = ({ item }) => {
       <div className="cardHeader">
         <div className="hometype">
           <FontAwesomeIcon icon={faHome} size="lg" />
-          <h2>{item.houseType}</h2>
+          {item.room_type ? <h2>{item.room_type}</h2> : <h2>Not Specified</h2>}
         </div>
 
-        <h1>{item.price}/day</h1>
+        <h1>${item.estimated_price}/day</h1>
       </div>
       <div className="content">
-        <h2>{item.region}</h2>
+        {item.neighbourhood_group_cleansed ? (
+          <h3>{item.neighbourhood_group_cleansed}</h3>
+        ) : (
+          <h3>No Neighborhood Specified</h3>
+        )}
         <div className="attributes">
           <div>
             <FontAwesomeIcon icon={faBed} size="2x" />
@@ -52,11 +63,11 @@ const ListingCard = ({ item }) => {
           </div>
           <div>
             <FontAwesomeIcon icon={faBath} size="2x" />
-            <h3>{item.baths} Baths</h3>
+            <h3>{item.bathrooms} Baths</h3>
           </div>
           <div>
             <FontAwesomeIcon icon={faDoorClosed} size="2x" />
-            <h3>{item.rooms} Rooms</h3>
+            <h3>{item.bedrooms} Rooms</h3>
           </div>
         </div>
       </div>

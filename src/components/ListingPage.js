@@ -1,35 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { LegitContext } from "../contexts/LegitContext";
 import ListingCard from "./ListingCard";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import "../styles/ListingPage.scss";
 import ListingForm from "./ListingForm";
 
 const ListingPage = () => {
+  const { auth, setAuth } = useContext(LegitContext);
+  const getUsers = userId => {
+    console.log(userId);
+    // axiosWithAuth()
+    //   .get(
+    //     `https://buildweek-airbnb.herokuapp.com/api/users/${userId}/property`
+    //   )
+    //   .then(res => setListings(res.data))
+    //   .catch(err => console.log(err));
+  };
+
   const [listings, setListings] = useState([
     {
-      houseType: "Apartment",
-      price: "$8,000,000",
-      region: "Haagen-Dasz Region",
+      room_type: "Apartment",
+      estimated_price: "8,000,000",
+      neighbourhood_group_cleansed: "Haagen-Dasz Region",
       beds: 2,
-      baths: 2,
-      rooms: 3
+      bathrooms: 2,
+      bedrooms: 3
     },
     {
-      houseType: "2-Room",
-      price: "$800",
-      region: "Ze Old Towne Region",
+      room_type: "2-Room",
+      estimated_price: "800",
+      neighbourhood_group_cleansed: "Ze Old Towne Region",
       beds: 2,
-      baths: 12,
-      rooms: 44445
+      bathrooms: 12,
+      bedrooms: 44445
     },
     {
-      houseType: "Private Room",
-      price: "$1,200",
-      region: "Lichsteiner Region",
+      room_type: "Private Room",
+      estimated_price: "1,200",
+      neighbourhood_group_cleansed: "Lichsteiner Region",
       beds: 1,
-      baths: 1,
-      rooms: 1
+      bathrooms: 1,
+      bedrooms: 1
     }
   ]);
+
 
   const addNewListing = x => {
     const newListing = {
@@ -43,6 +57,7 @@ const ListingPage = () => {
 
     setListings([...listings, newListing]);
   }
+
   return (
     <div className="listingPage">
       <div className="form-wrapper">
@@ -51,9 +66,18 @@ const ListingPage = () => {
       </div>
       <div className="grid-wrapper">
         <div className="grid">
-          {listings.map(item => (
-            <ListingCard item={item} />
-          ))}
+          {listings ? (
+            listings.map(item => (
+              <ListingCard
+                key={item.id}
+                item={item}
+                setListings={setListings}
+                listings={listings}
+              />
+            ))
+          ) : (
+            <h1>Loading...</h1>
+          )}
         </div>
       </div>
     </div>

@@ -11,12 +11,10 @@ import { AuthProvider } from "./utils/AuthenticationPractice";
 
 function App() {
   let location = useLocation();
-  const [auth, setAuth] = useState("false");
-  useEffect(() => {
-    console.log(auth);
-  }, []);
+  const [loginState, setLoginState] = useState("");
+
   return (
-    <LegitContext.Provider value={{ auth, setAuth }}>
+    <LegitContext.Provider value={{ loginState, setLoginState }}>
       <div className="App">
         <Navigation location={location} />
         <Switch>

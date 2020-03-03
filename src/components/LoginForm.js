@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { LegitContext } from "../contexts/LegitContext";
 import "../styles/LoginForm.scss";
 
 const LoginForm = props => {
-  const { auth, setAuth } = useContext(LegitContext);
+  const { auth, setAuth, getUsers } = useContext(LegitContext);
   const [creds, setCreds] = useState({
     username: "",
     password: ""
@@ -15,9 +16,19 @@ const LoginForm = props => {
 
   const login = e => {
     e.preventDefault();
-    setAuth(true);
-    console.log(auth);
-    props.history.push("/listings");
+    axiosWithAuth()
+      .post("user/login", creds)
+      .then(res => {
+        console.log(res);
+        localStorage.setItem("token", res.data.token);
+        // setAuth(res.data.user_id);
+        props.history.push("/listings");
+        console.log(res);
+      })
+      .catch(err => {
+        localStorage.removeItem("token");
+        console.log(err);
+      });
   };
   const goToRegister = () => {
     props.history.push("/register");
