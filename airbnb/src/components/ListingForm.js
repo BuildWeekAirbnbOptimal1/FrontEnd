@@ -2,7 +2,6 @@ import React from "react";
 import { withFormik, Form, Field, ErrorMessage, yupToFormErrors } from "formik";
 import * as Yup from "yup";
 
-
 function FormikListingForm() {
     return (
    <Form>
@@ -10,8 +9,8 @@ function FormikListingForm() {
        <div>Bedrooms: <Field type="number" name="bedrooms"/></div>       
        <div>Bathrooms: <Field type="number" name="bathrooms"/></div>
        <div>Rooms: <Field type="number" name="rooms"/></div>
-       <div>Amenities:<Field component="select" name="amenities" /*multiple={true} value={['A', 'B']}*/ /></div>
-       <div>Home Type:<Field component="select" name="hometype" /*value={['A', 'B']}*/ /></div>
+       <div>Amenities:<Field type="checkbox" name="amenities" /></div>
+       <div>Home Type:<Field component="select" name="hometype" value={['A', 'B']} /></div>
        <button type="submit">Add Property</button>
    </Form>
     );
