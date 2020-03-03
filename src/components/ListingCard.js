@@ -8,11 +8,14 @@ import {
   faBath,
   faDoorClosed,
   faEdit,
-  faTrashAlt
+  faTrashAlt,
+  faAngleDown,
+  faAngleUp
 } from "@fortawesome/free-solid-svg-icons";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const ListingCard = ({ item, listings, setListings }) => {
+  const [open, setOpen] = useState(false);
   const deleteListing = () => {
     console.log("Clicked this");
     axiosWithAuth()
@@ -27,6 +30,10 @@ const ListingCard = ({ item, listings, setListings }) => {
 
   const editListing = () => {
     console.log("Edit this Listing");
+  };
+
+  const openCard = () => {
+    setOpen(!open);
   };
 
   return (
@@ -70,7 +77,21 @@ const ListingCard = ({ item, listings, setListings }) => {
             <h3>{item.bedrooms} Rooms</h3>
           </div>
         </div>
+        <div className="arrow">
+          {" "}
+          {!open ? (
+            <FontAwesomeIcon icon={faAngleDown} size="lg" onClick={openCard} />
+          ) : (
+            <FontAwesomeIcon
+              icon={faAngleUp}
+              size="lg"
+              onClick={openCard}
+              className="upArrow"
+            />
+          )}
+        </div>
       </div>
+      {open ? <h1>Render a ton of content here please</h1> : null}
     </div>
   );
 };

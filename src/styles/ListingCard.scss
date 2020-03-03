@@ -69,4 +69,18 @@ $bnb-color: #ff5a5a;
       }
     }
   }
+  .arrow {
+    text-align: center;
+    cursor: pointer;
+    svg {
+      &:hover {
+        margin-bottom: -5px;
+        margin-top: 5px;
+      }
+    }
+    .upArrow {
+      margin-bottom: -5px;
+      margin-top: 5px;
+    }
+  }
 }
