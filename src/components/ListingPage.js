@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ListingCard from "./ListingCard";
 import "../styles/ListingPage.scss";
-// import ListingForm from "./ListingForm";
+import ListingForm from "./ListingForm";
 
 const ListingPage = () => {
   const [listings, setListings] = useState([
@@ -33,8 +33,8 @@ const ListingPage = () => {
   return (
     <div className="listingPage">
       <div className="form-wrapper">
-        <h1> Listing form here</h1>
-        {/* <ListingForm /> */}
+        <h1> Add A Property</h1>
+        <ListingForm />
       </div>
       <div className="grid-wrapper">
         <div className="grid">

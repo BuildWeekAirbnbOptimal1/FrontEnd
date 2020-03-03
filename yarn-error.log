@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: C:\Users\Isaiah\LambdaSchoolWork\Frontend\package.json: Unexpected token < in JSON at position 83
+  SyntaxError: C:\Users\Isaiah\LambdaSchoolWork\Frontend\package.json: Unexpected token = in JSON at position 131
       at JSON.parse (<anonymous>)
       at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
       at Generator.next (<anonymous>)
@@ -27,7 +27,6 @@ npm manifest:
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-  <<<<<<< HEAD
       "axios": "^0.19.2",
       "formik": "^2.1.4",
   =======
