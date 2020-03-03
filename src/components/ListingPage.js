@@ -3,7 +3,7 @@ import { LegitContext } from "../contexts/LegitContext";
 import ListingCard from "./ListingCard";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import "../styles/ListingPage.scss";
-// import ListingForm from "./ListingForm";
+import ListingForm from "./ListingForm";
 
 const ListingPage = () => {
   const { auth, setAuth } = useContext(LegitContext);
@@ -44,11 +44,25 @@ const ListingPage = () => {
     }
   ]);
 
+
+  const addNewListing = x => {
+    const newListing = {
+      id: Date.now(),
+      houseType: x.houseType,
+      region: x.region,
+      beds: x.beds,
+      baths: x.baths,
+      rooms: x.rooms
+    };
+
+    setListings([...listings, newListing]);
+  }
+
   return (
     <div className="listingPage">
       <div className="form-wrapper">
-        <h1> Listing form here</h1>
-        {/* <ListingForm /> */}
+        <h1> Add A Property</h1>
+        <ListingForm addNewListing={addNewListing}/>
       </div>
       <div className="grid-wrapper">
         <div className="grid">
