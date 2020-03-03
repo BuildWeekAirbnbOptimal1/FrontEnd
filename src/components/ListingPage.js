@@ -44,10 +44,6 @@ const ListingPage = () => {
     }
   ]);
 
-  useEffect(() => {
-    getUsers(auth);
-    console.log("This is auth", auth);
-  }, []);
   return (
     <div className="listingPage">
       <div className="form-wrapper">
