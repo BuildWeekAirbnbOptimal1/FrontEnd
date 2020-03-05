@@ -83,25 +83,25 @@ function FormikListingForm({
             <div>
               Neighborhood:
               <Field as="select" name="Neighbourhood_group_cleansed">
-                <option value="Friedrichshain Kreuzberg">
+                <option value="Friedrichshain - Kreuzberg">
                   Friedrichshain - Kreuzberg
                 </option>
                 <option value="Mitte">Mitte</option>
                 <option value="Pankow">Pankow</option>
-                <option value="Neukolln">Neukölln</option>
-                <option value="Charlottenburg Wilm">
+                <option value="Neukölln">Neukölln</option>
+                <option value="Charlottenburg - Wilm">
                   Charlottenburg - Wilm
                 </option>
-                <option value="Tempelhof Schoneberg">
+                <option value="Tempelhof - Schöneberg">
                   Tempelhof - Schöneberg
                 </option>
                 <option value="Lichtenberg">Lichtenberg</option>
-                <option value="Treptow Kopenick">Treptow - Köpenick</option>
-                <option value="Steglitz Zehlendorf">
+                <option value="Treptow - Köpenick">Treptow - Köpenick</option>
+                <option value="Steglitz - Zehlendorf">
                   Steglitz - Zehlendorf
                 </option>
                 <option value="Reinickendorf">Reinickendorf</option>
-                <option value="Marzahn Hellersdorf">
+                <option value="Marzahn - Hellersdorf">
                   Marzahn - Hellersdorf
                 </option>
                 <option value="Spandau">Spandau</option>

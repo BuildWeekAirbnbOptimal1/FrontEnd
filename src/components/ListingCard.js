@@ -68,9 +68,9 @@ const ListingCard = ({
       </div>
       <div className="content">
         {item.Neighbourhood_group_cleansed ? (
-          <h3>{item.Neighbourhood_group_cleansed}</h3>
+          <h2>{item.Neighbourhood_group_cleansed}</h2>
         ) : (
-          <h3>No Neighborhood Specified</h3>
+          <h2>No Neighborhood Specified</h2>
         )}
         <div className="attributes">
           <div>
