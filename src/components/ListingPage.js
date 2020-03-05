@@ -84,7 +84,7 @@ const ListingPage = () => {
     const newListing = {
       id: Date.now(),
       houseType: x.houseType,
-      region: x.region,
+      neighbourhood_group_cleansed: x.neighbourhood_group_cleansed,
       beds: x.beds,
       baths: x.baths,
       rooms: x.rooms
