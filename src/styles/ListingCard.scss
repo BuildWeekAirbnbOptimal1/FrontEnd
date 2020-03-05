@@ -6,6 +6,7 @@ $bnb-color: #ff5a5a;
   text-align: left;
   border-radius: 8px;
   margin: 20px;
+
   .panel-wrapper {
     filter: drop-shadow(3px 0px 3px rgba(0, 0, 0, 0.3));
     .controlpanel {
@@ -82,5 +83,14 @@ $bnb-color: #ff5a5a;
       margin-bottom: -5px;
       margin-top: 5px;
     }
+  }
+  .details {
+    background: $blue;
+    position: relative;
+    z-index: -1;
+    padding: 10px;
+    margin-top: -6px;
+    color: white;
+    box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.3);
   }
 }
