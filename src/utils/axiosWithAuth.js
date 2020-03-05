@@ -5,7 +5,8 @@ export const axiosWithAuth = () => {
 
   return axios.create({
     headers: {
-      Authorization: token
+      Authorization: token,
+      "Content-Type": "application/json"
     },
     baseURL: "https://airbnboptimal.herokuapp.com"
   });

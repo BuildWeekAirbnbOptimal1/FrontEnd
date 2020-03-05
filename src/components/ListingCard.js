@@ -14,7 +14,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-const ListingCard = ({ item, listings, setListings, hostId }) => {
+const ListingCard = ({
+  item,
+  listings,
+  setListings,
+  hostId,
+  setEditCard,
+  editCard
+}) => {
   const [open, setOpen] = useState(false);
   const deleteListing = () => {
     console.log("Clicked this");
@@ -29,7 +36,10 @@ const ListingCard = ({ item, listings, setListings, hostId }) => {
   };
 
   const editListing = () => {
-    console.log("Edit this Listing");
+    console.log("cardedit", item);
+    setEditCard({
+      ...item
+    });
   };
 
   const openCard = () => {
