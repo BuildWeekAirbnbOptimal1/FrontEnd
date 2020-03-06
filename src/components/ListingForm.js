@@ -46,18 +46,18 @@ function FormikListingForm({ values, errors, touched, isSubmitting }) {
             
             return {
                 optimal_price: optimal_price || 650,
-                name: name || "",
+                name: name || "NAME",
                 bedrooms: bedrooms || 1,
                 bathrooms: bathrooms || 1,
                 bed_type: bed_type || "twin",
-                room_type: room_type  || "",
+                room_type: room_type  || "Single",
                 maximum_nights: maximum_nights || 1,
                 minimum_nights: minimum_nights || 1,
                 extra_people: extra_people || 1,
                 accommodates: accommodates || 1,
                 Neighbourhood_group_cleansed: Neighbourhood_group_cleansed,
                 property_type: property_type || 1,
-                cancellation_policy: cancellation_policy  || "",
+                cancellation_policy: cancellation_policy  || "Mild",
                 guests_included: guests_included || 1,
                 id: id
             };
