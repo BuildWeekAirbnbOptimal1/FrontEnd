@@ -154,32 +154,5 @@ function FormikListingForm({
     </Formik>
   );
 }
-<<<<<<< HEAD
-    const ListingForm = withFormik({
-        mapPropsToValues({ optimal_price, name, bedrooms, bathrooms, bed_type, Neighbourhood_group_cleansed, id, room_type, maximum_nights, minimum_nights, extra_people, accommodates, property_type, cancellation_policy, guests_included }) {
-            
-            return {
-                optimal_price: optimal_price || 650,
-                name: name || "NAME",
-                bedrooms: bedrooms || 1,
-                bathrooms: bathrooms || 1,
-                bed_type: bed_type || "twin",
-                room_type: room_type  || "Single",
-                maximum_nights: maximum_nights || 1,
-                minimum_nights: minimum_nights || 1,
-                extra_people: extra_people || 1,
-                accommodates: accommodates || 1,
-                Neighbourhood_group_cleansed: Neighbourhood_group_cleansed,
-                property_type: property_type || 1,
-                cancellation_policy: cancellation_policy  || "Mild",
-                guests_included: guests_included || 1,
-                id: id
-            };
-        },
-        validationSchema: Yup.object().shape({
-            bedrooms: Yup.string().required("How many bedrooms?"),
-            bathrooms: Yup.string().required("How many bathrooms?"),
-=======
->>>>>>> c87f580682a6c1c37919a0918b45dd5869905e14
 
 export default FormikListingForm;
