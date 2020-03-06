@@ -123,6 +123,7 @@ const ListingPage = () => {
     <div className="listingPage">
       <div className="form-wrapper">
         <h1> Add A Property</h1>
+
         <ListingForm id={id} addNewListing={addNewListing} />
       </div>
       <div className="grid-wrapper">
