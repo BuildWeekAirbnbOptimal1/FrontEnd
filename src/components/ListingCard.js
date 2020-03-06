@@ -128,7 +128,7 @@ const ListingCard = ({
               size="2x"
               alt={item.room_type}
             />
-            <h3>Rooms- {getBaseOptionValue("room_type", item.room_type)}</h3>
+            <h3>Rooms - {getBaseOptionValue("room_type", item.room_type)}</h3>
           </div>
         </div>
         <div className="arrow">
@@ -151,7 +151,10 @@ const ListingCard = ({
           <p>Bed Type: {getBaseOptionValue("bed_type", item.bed_type)}</p>
           <p>Accommodates: {item.accommodates}</p>
           <p>
-            Number of Nights: {item.minimum_nights}-{item.maximum_nights}
+            Number of Nights:{" "}
+            {item.minimum_nights >= item.maximum_nights
+              ? `${item.minimum_nights}`
+              : `${item.minimum_nights} - ${item.maximum_nights}`}
           </p>
           <p>Extra people: {item.extra_people}</p>
           <p>
