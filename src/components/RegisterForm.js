@@ -1,10 +1,8 @@
 import React, { useState, useContext } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { LegitContext } from "../contexts/LegitContext";
 import "../styles/LoginForm.scss";
 
 const RegisterForm = props => {
-  //   const { auth, setAuth } = useContext(LegitContext);
   const [userCreds, setUserCreds] = useState({
     firstname: "",
     lastname: "",
@@ -21,9 +19,11 @@ const RegisterForm = props => {
 
   const register = e => {
     e.preventDefault();
+    console.log("user creds", userCreds);
     axiosWithAuth()
       .post("user/register", userCreds)
       .then(res => {
+        localStorage.setItem("token", res.data.payload);
         console.log(res);
         if (res.statusText === "Created") {
           setConfirm(
@@ -34,12 +34,9 @@ const RegisterForm = props => {
         } else {
           setConfirm(null);
         }
-        // localStorage.setItem("token", res.data.payload);
-        // props.history.push("/listings");
       })
       .catch(err => {
         localStorage.removeItem("token");
-        localStorage.removeItem("memberId");
         if (err.message) {
           setConfirm(
             <h4 style={{ color: "red", marginTop: "-20px" }}>
