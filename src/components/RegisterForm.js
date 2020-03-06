@@ -26,14 +26,28 @@ const RegisterForm = props => {
       .then(res => {
         console.log(res);
         if (res.statusText === "Created") {
-          setConfirm(true);
+          setConfirm(
+            <h4 style={{ color: "lightgreen", marginTop: "-20px" }}>
+              Thanks for registering.
+            </h4>
+          );
+        } else {
+          setConfirm(null);
         }
         // localStorage.setItem("token", res.data.payload);
         // props.history.push("/listings");
       })
       .catch(err => {
         localStorage.removeItem("token");
-        console.log(err);
+        localStorage.removeItem("memberId");
+        if (err.message) {
+          setConfirm(
+            <h4 style={{ color: "red", marginTop: "-20px" }}>
+              Please fill out all fields.
+            </h4>
+          );
+          console.log(err);
+        }
       });
   };
 
@@ -46,13 +60,10 @@ const RegisterForm = props => {
     <div className="form-card regstyle">
       <form>
         <h1>Register</h1>
-        {confirm ? (
-          <h4 style={{ color: "lightgreen", marginTop: "-20px" }}>
-            Thanks for registering.
-          </h4>
-        ) : null}
+        {confirm}
         <label htmlFor="firstname">first name</label>
         <input
+          required
           name="firstname"
           type="text"
           onChange={handleChange}
@@ -60,6 +71,7 @@ const RegisterForm = props => {
         ></input>
         <label htmlFor="lastname">last name</label>
         <input
+          required
           name="lastname"
           type="text"
           onChange={handleChange}
@@ -67,6 +79,7 @@ const RegisterForm = props => {
         ></input>
         <label htmlFor="username">username</label>
         <input
+          required
           name="username"
           type="text"
           onChange={handleChange}
@@ -74,6 +87,7 @@ const RegisterForm = props => {
         ></input>
         <label htmlFor="password">password</label>
         <input
+          required
           name="password"
           type="password"
           onChange={handleChange}
@@ -81,6 +95,7 @@ const RegisterForm = props => {
         ></input>
         <label htmlFor="confirm">email</label>
         <input
+          required
           name="email"
           type="email"
           onChange={handleChange}

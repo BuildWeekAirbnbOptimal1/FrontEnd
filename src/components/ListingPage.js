@@ -8,6 +8,8 @@ import { separateMessageFromStack } from "jest-message-util";
 
 const ListingPage = () => {
   const { id, setId } = useContext(LegitContext);
+  const [editCard, setEditCard] = useState(null);
+  const [listings, setListings] = useState([]);
   const [message, setMessage] = useState("");
   const getUsers = () => {
     axiosWithAuth()
@@ -15,116 +17,42 @@ const ListingPage = () => {
       .then(res => {
         setListings(res.data.user_properties);
         setMessage(res.data.message);
-        console.log("properties", res);
       })
       .catch(err => {
         console.log(err);
-        console.log("this is the id", id);
       });
   };
 
   useEffect(() => {
+    setId(localStorage.getItem("memberId"));
     getUsers();
   }, []);
-  const [listings, setListings] = useState([
-    // {
-    //   room_type: "Apartment",
-    //   estimated_price: "8,000,000",
-    //   neighbourhood_group_cleansed: "Haagen-Dasz Region",
-    //   beds: 2,
-    //   bathrooms: 2,
-    //   bedrooms: 3,
-    //   bed_type: "Queen",
-    //   room_type: "Single",
-    //   maximum_nights: 8,
-    //   minimum_nights: 1,
-    //   extra_people: 5,
-    //   accomodates: 10,
-    //   property_type: "Apartment",
-    //   cancellation_policy: "Yes",
-    //   guests_included: 8
-    // },
-    // {
-    //   room_type: "2-Room",
-    //   estimated_price: "800",
-    //   neighbourhood_group_cleansed: "Ze Old Towne Region",
-    //   beds: 2,
-    //   bathrooms: 12,
-    //   bedrooms: 44445,
-    //   bed_type: "King",
-    //   room_type: "Single",
-    //   maximum_nights: 8,
-    //   minimum_nights: 1,
-    //   extra_people: 5,
-    //   accomodates: 10,
-    //   property_type: "Apartment",
-    //   cancellation_policy: "yes",
-    //   guests_included: 8
-    // },
-    // {
-    //   room_type: "Private Room",
-    //   estimated_price: "1,200",
-    //   neighbourhood_group_cleansed: "Lichsteiner Region",
-    //   beds: 1,
-    //   bathrooms: 1,
-    //   bedrooms: 1,
-    //   bed_type: "king",
-    //   room_type: "Single",
-    //   maximum_nights: 8,
-    //   minimum_nights: 1,
-    //   extra_people: 5,
-    //   accomodates: 10,
-    //   property_type: "Apartment",
-    //   cancellation_policy: "yes",
-    //   guests_included: 8
-    // }
-  ]);
 
-  const addNewListing = x => {
-    const newListing = {
-      id: Date.now(),
-      houseType: x.houseType,
-      neighbourhood_group_cleansed: x.neighbourhood_group_cleansed,
-      beds: x.beds,
-      baths: x.baths,
-      rooms: x.rooms
-    };
-
-    setListings([...listings, newListing]);
-  };
-  const postAlisting = () => {
-    const dataobj = {
-      name: "Test12",
-      bedrooms: 2,
-      bathrooms: 1,
-      bed_type: "queen",
-      room_type: "Entire home",
-      maximum_nights: 10,
-      minimum_nights: 3,
-      extra_people: 3,
-      accommodates: 6,
-      Neighbourhood_group_cleansed: "Deep Dive initiative",
-      property_type: "Beach House",
-      cancellation_policy: "Mild",
-      guests_included: 2,
-      optimal_price: 650
-    };
-    axiosWithAuth()
-      .post(`/host/${id}/properties`, dataobj)
-      .then(res => {
-        // setListings(res.data.user_properties);
-        // setMessage(res.data.message);
-        console.log("succesful post", res);
-      })
-      .catch(err => console.log(err));
+  const setValuesToListings = (newValue, id) => {
+    setEditCard(null);
+    setListings(listings => {
+      let newListings = [...listings];
+      if (id) {
+        newListings = newListings.map(item =>
+          item.id === id ? newValue : item
+        );
+      } else {
+        newListings.push(newValue);
+      }
+      return newListings;
+    });
   };
 
   return (
     <div className="listingPage">
       <div className="form-wrapper">
-        <h1> Add A Property</h1>
+        {editCard ? <h1> Edit a Property</h1> : <h1> Add A Property</h1>}
 
-        <ListingForm id={id} addNewListing={addNewListing} />
+        <ListingForm
+          hostId={id}
+          setValuesToListings={setValuesToListings}
+          editCard={editCard}
+        />
       </div>
       <div className="grid-wrapper">
         <div className="grid">
@@ -138,13 +66,14 @@ const ListingPage = () => {
                 item={item}
                 setListings={setListings}
                 listings={listings}
+                setEditCard={setEditCard}
+                editCard={editCard}
               />
             ))
           ) : (
             <h1>Loading...</h1>
           )}
         </div>
-        <button onClick={postAlisting}>Post</button>
       </div>
     </div>
   );
