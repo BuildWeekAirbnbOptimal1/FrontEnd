@@ -47,13 +47,14 @@ const ListingPage = () => {
   return (
     <div className="listingPage">
       <div className="form-wrapper">
-        {editCard ? <h1> Edit a Property</h1> : <h1> Add A Property</h1>}
-
-        <ListingForm
-          hostId={id}
-          setValuesToListings={setValuesToListings}
-          editCard={editCard}
-        />
+        <div className="form-square">
+          {editCard ? <h1> Edit a Property</h1> : <h1> Add A Property</h1>}
+          <ListingForm
+            hostId={id}
+            setValuesToListings={setValuesToListings}
+            editCard={editCard}
+          />
+        </div>
       </div>
       <div className="grid-wrapper">
         <div className="grid">

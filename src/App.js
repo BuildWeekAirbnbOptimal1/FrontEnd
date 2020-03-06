@@ -7,7 +7,6 @@ import ListingPage from "./components/ListingPage";
 import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.scss";
-import { AuthProvider } from "./utils/AuthenticationPractice";
 
 function App() {
   let location = useLocation();

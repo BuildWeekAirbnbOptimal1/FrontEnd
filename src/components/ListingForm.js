@@ -12,6 +12,7 @@ import {
 import * as Yup from "yup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
+import "../styles/ListingForm.scss";
 
 const initialValues = {
   name: "New Property",
@@ -172,9 +173,9 @@ function FormikListingForm({
               <Field type="number" name="guests_included" />
             </div>
             {editCard ? (
-              <button type="submit">Edit Property</button>
+              <button type="submit">Edit</button>
             ) : (
-              <button type="submit">Add Property</button>
+              <button type="submit">Add</button>
             )}
           </Form>
         );
