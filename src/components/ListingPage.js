@@ -10,11 +10,13 @@ const ListingPage = () => {
   const [editCard, setEditCard] = useState(null);
   const [listings, setListings] = useState([]);
   const [message, setMessage] = useState("");
+
   const getUsers = () => {
     axiosWithAuth()
       .get(`/host/${id}/properties`)
       .then(res => {
-        setListings(res.data.user_properties);
+        console.log("initial get", res);
+        setListings(res.data.user_properties || []);
         setMessage(res.data.message);
       })
       .catch(err => {
@@ -27,8 +29,8 @@ const ListingPage = () => {
   }, []);
 
   const setValuesToListings = (newValue, id) => {
+    console.log("svtl", id, newValue);
     setEditCard(null);
-    setListings([...listings, newValue]);
     setMessage("");
     if (id) {
       setListings(
@@ -45,20 +47,20 @@ const ListingPage = () => {
   return (
     <div className="listingPage">
       <div className="form-wrapper">
-        {editCard ? <h1> Edit a Property</h1> : <h1> Add A Property</h1>}
-
-        <ListingForm
-          hostId={id}
-          setValuesToListings={setValuesToListings}
-          editCard={editCard}
-        />
+        <div className="form-square">
+          {editCard ? <h1> Edit a Property</h1> : <h1> Add A Property</h1>}
+          <ListingForm
+            hostId={id}
+            setValuesToListings={setValuesToListings}
+            editCard={editCard}
+          />
+        </div>
       </div>
       <div className="grid-wrapper">
         <div className="grid">
-          {/* {message ? (
+          {message ? (
             <h1>{message}</h1>
-          ) : */}
-          {listings ? (
+          ) : listings.length ? (
             listings.map(item => (
               <ListingCard
                 key={item.id}
