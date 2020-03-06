@@ -14,7 +14,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-const ListingCard = ({ item, listings, setListings, hostId }) => {
+const ListingCard = ({
+  item,
+  listings,
+  setListings,
+  hostId,
+  setEditCard,
+  editCard
+}) => {
   const [open, setOpen] = useState(false);
   const deleteListing = () => {
     console.log("Clicked this");
@@ -29,7 +36,10 @@ const ListingCard = ({ item, listings, setListings, hostId }) => {
   };
 
   const editListing = () => {
-    console.log("Edit this Listing");
+    console.log("cardedit", item);
+    setEditCard({
+      ...item
+    });
   };
 
   const openCard = () => {
@@ -58,9 +68,9 @@ const ListingCard = ({ item, listings, setListings, hostId }) => {
       </div>
       <div className="content">
         {item.Neighbourhood_group_cleansed ? (
-          <h3>{item.Neighbourhood_group_cleansed}</h3>
+          <h2>{item.Neighbourhood_group_cleansed}</h2>
         ) : (
-          <h3>No Neighborhood Specified</h3>
+          <h2>No Neighborhood Specified</h2>
         )}
         <div className="attributes">
           <div>

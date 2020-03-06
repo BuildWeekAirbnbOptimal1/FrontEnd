@@ -26,6 +26,7 @@ const LoginForm = props => {
       .post("user/login", creds)
       .then(res => {
         console.log(res);
+        localStorage.setItem("memberId", res.data.userId);
         localStorage.setItem("token", res.data.token);
         setId(res.data.userId);
         props.history.push("/listings");
