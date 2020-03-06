@@ -10,7 +10,6 @@ import {
 } from "formik";
 import * as Yup from "yup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { LegitContext } from "../contexts/LegitContext";
 
 const initialValues = {
   optimal_price: 500,
@@ -51,9 +50,9 @@ function FormikListingForm({
         axiosWithAuth()
           [method](url, values)
           .then(response => {
-            console.log(response);
+            console.log("onsubmit", response);
             setValuesToListings(response.data.hostProperty, values.id);
-            console.log("id when submitting", hostId);
+            console.log("values id", values.id);
             formikBag.resetForm();
           })
           .catch(error => console.log(error.response));

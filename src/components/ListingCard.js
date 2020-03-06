@@ -46,6 +46,26 @@ const ListingCard = ({
     setOpen(!open);
   };
 
+  const renderSwitch = value => {
+    switch (value) {
+      case "Mitte":
+        return <div className="imgContainer mitten"></div>;
+      case "Friedrichshain - Kreuzberg":
+        return <div className="imgContainer krauzberg"></div>;
+      case "Lichtenberg":
+        return <div className="imgContainer lichtenberg"></div>;
+      case "Neukölln":
+        return <div className="imgContainer neukoln"></div>;
+      case "Pankow":
+        return <div className="imgContainer pankow"></div>;
+      case "Spandau":
+        return <div className="imgContainer spandau"></div>;
+      case "Charlottenburg - Wilm":
+        return <div className="imgContainer garden"></div>;
+      default:
+        return <div className="imgContainer"></div>;
+    }
+  };
   return (
     <div className="card">
       <div className="panel-wrapper">
@@ -58,7 +78,8 @@ const ListingCard = ({
           </div>
         </div>
       </div>
-      <div className="imgContainer">{/* <img src={img} alt="image" /> */}</div>
+      <div className="imgContainer"></div>
+      {/* {renderSwitch(item.Neighbourhood_group_cleansed)} */}
       <div className="cardHeader">
         <div className="hometype">
           {item.name ? <h2>{item.name}</h2> : <h2>Name Not Specified</h2>}

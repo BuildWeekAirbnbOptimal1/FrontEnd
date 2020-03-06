@@ -4,7 +4,6 @@ import ListingCard from "./ListingCard";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import "../styles/ListingPage.scss";
 import ListingForm from "./ListingForm";
-import { separateMessageFromStack } from "jest-message-util";
 
 const ListingPage = () => {
   const { id, setId } = useContext(LegitContext);
@@ -24,23 +23,23 @@ const ListingPage = () => {
   };
 
   useEffect(() => {
-    setId(localStorage.getItem("memberId"));
     getUsers();
   }, []);
 
   const setValuesToListings = (newValue, id) => {
     setEditCard(null);
-    setListings(listings => {
-      let newListings = [...listings];
-      if (id) {
-        newListings = newListings.map(item =>
-          item.id === id ? newValue : item
-        );
-      } else {
-        newListings.push(newValue);
-      }
-      return newListings;
-    });
+    setListings([...listings, newValue]);
+    setMessage("");
+    if (id) {
+      setListings(
+        listings.map(item => {
+          return item.id === id ? newValue : item;
+        })
+      );
+    } else {
+      setListings([...listings, newValue]);
+    }
+    return newValue;
   };
 
   return (
@@ -56,9 +55,10 @@ const ListingPage = () => {
       </div>
       <div className="grid-wrapper">
         <div className="grid">
-          {message ? (
+          {/* {message ? (
             <h1>{message}</h1>
-          ) : listings ? (
+          ) : */}
+          {listings ? (
             listings.map(item => (
               <ListingCard
                 key={item.id}
