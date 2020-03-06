@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { mapBaseOption } from "../utils/baseOptions";
 import {
   withFormik,
   Form,
@@ -10,22 +11,22 @@ import {
 } from "formik";
 import * as Yup from "yup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios";
 
 const initialValues = {
-  optimal_price: 500,
-  name: "place",
+  name: "New Property",
   bedrooms: 1,
   bathrooms: 1,
-  bed_type: "Twin",
-  room_type: "big",
-  maximum_nights: 2,
+  bed_type: "Sofa_Other",
+  room_type: "Entire_home/apt",
+  maximum_nights: 1,
   minimum_nights: 1,
-  extra_people: 5,
-  accommodates: 1,
+  extra_people: 0,
+  accommodates: 2,
   Neighbourhood_group_cleansed: "Lichtenberg",
-  property_type: "apartment",
-  cancellation_policy: "severe",
-  guests_included: 5
+  property_type: "Apartment",
+  cancellation_policy: "flexible",
+  guests_included: 0
 };
 
 function FormikListingForm({
@@ -47,16 +48,42 @@ function FormikListingForm({
           ? `host/${hostId}/properties/${values.id}`
           : `host/${hostId}/properties/`;
         let method = values.id ? "put" : "post";
-        axiosWithAuth()
-          [method](url, values)
+
+        const params = new URLSearchParams();
+        params.append("accomodates", values.accommodates);
+        params.append("bedrooms", values.bedrooms);
+        params.append("cleaning_fee", 20);
+        params.append("extra_people", values.extra_people);
+        params.append("guests_included", values.guests_included);
+        params.append("minimum_nights", values.minimum_nights);
+        params.append(
+          "neighbourhood",
+          `neighbourhood_group_cleansed_${values.Neighbourhood_group_cleansed}`
+        );
+        params.append("property_type", `property_type_${values.property_type}`);
+        params.append("room_type", `room_type_${values.room_type}`);
+        params.append("bed_type", `bed_type_${values.bed_type}`);
+        params.append("instant_bookable", "instant_bookable_t");
+        params.append(
+          "cancellation_policy",
+          `cancellation_policy_${values.cancellation_policy}`
+        );
+        axios
+          .post(`https://easy-proxy-yo.herokuapp.com/price`, params)
           .then(response => {
-            console.log("onsubmit", response);
-            setValuesToListings(response.data.hostProperty, values.id);
-            console.log("values id", values.id);
-            formikBag.resetForm();
+            values.optimal_price = response.data.price;
+            console.log("proxy response", response);
+            axiosWithAuth()
+              [method](url, values)
+              .then(response => {
+                console.log("onsubmit", response);
+                setValuesToListings(response.data.hostProperty, values.id);
+                console.log("values id", values.id);
+                formikBag.resetForm();
+              })
+              .catch(error => console.log(error.response));
           })
           .catch(error => console.log(error.response));
-        console.log(values);
       }}
     >
       {() => {
@@ -74,41 +101,35 @@ function FormikListingForm({
             <div>
               Bed Type:
               <Field as="select" name="bed_type">
-                <option value="Twin">Twin</option>
-                <option value="King">King</option>
-                <option value="Queen">Queen</option>
+                {mapBaseOption("bed_type", ({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
               </Field>
             </div>
             <div>
               Neighborhood:
               <Field as="select" name="Neighbourhood_group_cleansed">
-                <option value="Friedrichshain - Kreuzberg">
-                  Friedrichshain - Kreuzberg
-                </option>
-                <option value="Mitte">Mitte</option>
-                <option value="Pankow">Pankow</option>
-                <option value="Neukölln">Neukölln</option>
-                <option value="Charlottenburg - Wilm">
-                  Charlottenburg - Wilm
-                </option>
-                <option value="Tempelhof - Schöneberg">
-                  Tempelhof - Schöneberg
-                </option>
-                <option value="Lichtenberg">Lichtenberg</option>
-                <option value="Treptow - Köpenick">Treptow - Köpenick</option>
-                <option value="Steglitz - Zehlendorf">
-                  Steglitz - Zehlendorf
-                </option>
-                <option value="Reinickendorf">Reinickendorf</option>
-                <option value="Marzahn - Hellersdorf">
-                  Marzahn - Hellersdorf
-                </option>
-                <option value="Spandau">Spandau</option>
+                {mapBaseOption(
+                  "Neighbourhood_group_cleansed",
+                  ({ value, label }) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  )
+                )}
               </Field>
             </div>
             <div>
               Room Type:
-              <Field type="text" name="room_type" />
+              <Field as="select" name="room_type">
+                {mapBaseOption("room_type", ({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </Field>
             </div>
             <div>
               Maximum Nights:
@@ -128,19 +149,27 @@ function FormikListingForm({
             </div>
             <div>
               Property Type:
-              <Field type="text" name="property_type" />
+              <Field as="select" name="property_type">
+                {mapBaseOption("property_type", ({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </Field>
             </div>
             <div>
               Cancellation Policy:
-              <Field type="text" name="cancellation_policy" />
+              <Field as="select" name="cancellation_policy">
+                {mapBaseOption("cancellation_policy", ({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </Field>
             </div>
             <div>
               Guests Included:
               <Field type="number" name="guests_included" />
-            </div>
-            <div>
-              Optimal Price:
-              <Field type="number" name="optimal_price" />
             </div>
             {editCard ? (
               <button type="submit">Edit Property</button>
