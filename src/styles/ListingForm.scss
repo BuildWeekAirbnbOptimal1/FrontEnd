@@ -16,6 +16,9 @@ $bnb-color: #ff5a5a;
 }
 
 form {
+  .red {
+    color: darkRed;
+  }
   button {
     @include btn;
   }
