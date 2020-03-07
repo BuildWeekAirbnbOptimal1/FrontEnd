@@ -34,15 +34,16 @@ function FormikListingForm({
   hostId,
   setValuesToListings,
   editCard,
-  setEditCard
+  setEditCard, 
+
 }) {
   return (
     <Formik
       enableReinitialize={true}
       initialValues={editCard || initialValues}
       validationSchema={Yup.object().shape({
-        bedrooms: Yup.string().required("How many bedrooms?"),
-        bathrooms: Yup.string().required("How many bathrooms?")
+        bedrooms: Yup.number().min(1, 'must have at least 1 bedroom').required("How many bedrooms?"),
+        bathrooms: Yup.number().min(1, 'must have at least 1 bathroom').required("How many bathrooms?"),
       })}
       onSubmit={(values, formikBag) => {
         let url = values.id
@@ -87,7 +88,7 @@ function FormikListingForm({
           .catch(error => console.log(error.response));
       }}
     >
-      {() => {
+      {(touched, errors) => {
         return (
           <Form>
             <div>
@@ -95,9 +96,11 @@ function FormikListingForm({
             </div>
             <div>
               Bedrooms: <Field type="number" name="bedrooms" />
+              <ErrorMessage name="bedrooms" component="div" className="red" />
             </div>
             <div>
               Bathrooms: <Field type="number" name="bathrooms" />
+              <ErrorMessage name="bathrooms" component="div" className="red" />
             </div>
             <div>
               Bed Type:
