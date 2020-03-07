@@ -31,7 +31,12 @@ const Navigation = props => {
       <nav>
         <ul>
           <li>
-            <a href="#">About</a>
+            <a
+              target="_blank"
+              href="https://hungry-pasteur-a7a528.netlify.com/"
+            >
+              About
+            </a>
           </li>
           <li>
             <Link onClick={SignIn} to="/listings">

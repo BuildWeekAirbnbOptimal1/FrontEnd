@@ -60,7 +60,7 @@ const LoginForm = props => {
   return (
     <div className="form-card">
       <form>
-        <h1>Log in to Predictor</h1>
+        <h1>Log in to Optimizer</h1>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <label htmlFor="username">username</label>
           {touch.username ? (
